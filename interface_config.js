@@ -190,6 +190,7 @@ var interfaceConfig = {
      */
     // APP_SCHEME: 'org.jitsi.meet',
 
+    // eslint-disable-next-line sort-keys
     NATIVE_APP_NAME: 'next-round',
 
     /**

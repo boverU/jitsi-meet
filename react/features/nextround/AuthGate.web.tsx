@@ -491,12 +491,17 @@ export function withNextRoundAuth(WrappedApp: React.ComponentType<any>): React.C
         const roomCode = roomCodeFromPath();
 
         if (roomCode) {
-            // Recorder mode: apply iAmRecorder directly (the `#config.*` hash is
-            // ignored by this deployment) so Jitsi skips prejoin and joins hidden.
+            // Recorder mode: apply config directly (the `#config.*` hash is ignored
+            // by this deployment) so the headless recorder joins hidden and skips
+            // prejoin. iAmRecorder alone does NOT disable prejoin in this build, and
+            // the recorder never clicks "Join", so we also turn prejoin off here.
             if (isRecorderRequest() || recorderStashed()) {
                 try {
-                    (window as any).config = (window as any).config || {};
-                    (window as any).config.iAmRecorder = true;
+                    const w = window as any;
+
+                    w.config = w.config || {};
+                    w.config.iAmRecorder = true;
+                    w.config.prejoinConfig = { ...(w.config.prejoinConfig || {}), enabled: false };
                 } catch (e) {
                     // config not ready yet; the RecorderRoomEntry reload re-runs this.
                 }
