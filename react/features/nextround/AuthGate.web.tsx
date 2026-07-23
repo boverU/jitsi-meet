@@ -1,11 +1,9 @@
 /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals, react/no-multi-comp */
 import {
     ClerkProvider,
-    OrganizationList,
     SignIn,
     SignedIn,
-    SignedOut,
-    useOrganization
+    SignedOut
 } from '@clerk/clerk-react';
 import React from 'react';
 
@@ -253,53 +251,6 @@ function NextRoundSignIn() {
 }
 
 /**
- * B2B gate: every interview belongs to a company, so a signed-in staff member
- * must have an active Clerk organization before the dashboard can act. If they
- * have none selected, let them create or pick one.
- *
- * @param {ChildrenProps} props - Children to render once an org is active.
- * @returns {ReactElement | null}
- */
-function RequireOrg({ children }: ChildrenProps) {
-    const { organization, isLoaded } = useOrganization();
-
-    if (!isLoaded) {
-        return null;
-    }
-
-    if (!organization) {
-        return (
-            <div
-                style = {{
-                    minHeight: '100vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '20px',
-                    background: '#040404',
-                    fontFamily: FONT_STACK
-                }}>
-                <div
-                    style = {{
-                        color: '#fff',
-                        fontSize: '18px',
-                        fontWeight: 600
-                    }}>
-                    Choose your company
-                </div>
-                <OrganizationList
-                    afterCreateOrganizationUrl = '/'
-                    afterSelectOrganizationUrl = '/'
-                    hidePersonal = { true } />
-            </div>
-        );
-    }
-
-    return <>{ children }</>;
-}
-
-/**
  * Removes any leftover room token from the URL and sessionStorage. Jitsi's
  * hang-up redirect returns to the base URL with the room's `jwt` still attached.
  *
@@ -399,9 +350,10 @@ function RootLanding() {
             afterSignOutUrl = '/'
             publishableKey = { CLERK_PUBLISHABLE_KEY }>
             <SignedInGate>
-                <RequireOrg>
-                    <Welcome />
-                </RequireOrg>
+                { /* B2C: no org gate — the API auto-provisions a personal
+                     workspace on first call, so signed-in staff land straight
+                     on the dashboard. */ }
+                <Welcome />
             </SignedInGate>
             <SignedOutGate>
                 <NextRoundSignIn />

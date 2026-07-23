@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals, react/no-multi-comp */
-import { OrganizationSwitcher, UserButton, useAuth, useOrganization } from '@clerk/clerk-react';
+import { UserButton, useAuth, useOrganization } from '@clerk/clerk-react';
 // Material Design 3 web components (the design system Google Meet is built on).
 // Side-effect imports register the custom elements; React 19 renders them natively.
 import '@material/web/button/filled-button.js';
@@ -427,7 +427,6 @@ export default function Welcome() {
                             { clock }
                         </span>
                     ) }
-                    <OrganizationSwitcher hidePersonal = { true } />
                     <UserButton />
                 </div>
             </header>
