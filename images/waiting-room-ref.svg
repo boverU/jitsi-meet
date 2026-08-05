@@ -1,0 +1,22 @@
+<svg width="330" height="330" viewBox="0 0 330 330" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Candidate waiting in the lobby</title>
+  <circle cx="165" cy="165" r="164" fill="#E6F0FF"/>
+  <!-- video tile -->
+  <rect x="72" y="98" width="186" height="140" rx="20" fill="#FFFFFF"/>
+  <!-- candidate avatar -->
+  <circle cx="165" cy="160" r="42" fill="#2C83FC"/>
+  <circle cx="165" cy="147" r="15" fill="#FFFFFF"/>
+  <path d="M141 186c0-13 11-21 24-21s24 8 24 21z" fill="#FFFFFF"/>
+  <!-- name bar -->
+  <rect x="118" y="212" width="94" height="12" rx="6" fill="#E8F0FE"/>
+  <!-- waiting clock badge -->
+  <circle cx="246" cy="106" r="30" fill="#FFC000"/>
+  <path d="M246 90v17l12 7" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- lobby "safe" shield check -->
+  <path d="M84 214l-14 5v10c0 8 6 14 14 18 8-4 14-10 14-18v-10l-14-5z" fill="#00A150"/>
+  <path d="M78 233l4 4 8-8" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- decorative dots -->
+  <circle cx="268" cy="214" r="6" fill="#9AC2FF"/>
+  <circle cx="90" cy="72" r="5" fill="#C2DAFF"/>
+  <circle cx="255" cy="176" r="4" fill="#C2DAFF"/>
+</svg>

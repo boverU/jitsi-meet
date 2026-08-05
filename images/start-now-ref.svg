@@ -1,0 +1,18 @@
+<svg width="330" height="330" viewBox="0 0 330 330" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Start an interview instantly</title>
+  <circle cx="165" cy="165" r="164" fill="#E6F0FF"/>
+  <!-- video tile -->
+  <rect x="72" y="96" width="186" height="140" rx="20" fill="#FFFFFF"/>
+  <!-- green start / play button -->
+  <circle cx="165" cy="166" r="48" fill="#00A150"/>
+  <path d="M152 142l42 24-42 24z" fill="#FFFFFF"/>
+  <!-- camera badge -->
+  <circle cx="248" cy="108" r="28" fill="#2C83FC"/>
+  <g transform="translate(234 94) scale(1.18)">
+    <path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z" fill="#FFFFFF"/>
+  </g>
+  <!-- decorative dots -->
+  <circle cx="84" cy="212" r="6" fill="#C2DAFF"/>
+  <circle cx="270" cy="206" r="5" fill="#9AC2FF"/>
+  <circle cx="92" cy="74" r="5" fill="#C2DAFF"/>
+</svg>
