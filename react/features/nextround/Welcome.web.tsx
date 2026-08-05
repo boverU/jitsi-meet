@@ -179,35 +179,21 @@ const CloseIcon = () => (
         <path d = 'M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z' />
     </svg>
 );
-const SlideLinkIcon = () => (
-    <svg fill = 'none' height = '56' viewBox = '0 0 24 24' width = '56'>
-        <path d = 'M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1' stroke = '#1a73e8' strokeLinecap = 'round' strokeWidth = '2' />
-    </svg>
-);
-const SlideLobbyIcon = () => (
-    <svg fill = 'none' height = '56' viewBox = '0 0 24 24' width = '56'>
-        <circle cx = '12' cy = '12' r = '9' stroke = '#1a73e8' strokeWidth = '2' />
-        <path d = 'M12 7v5l3 2' stroke = '#1a73e8' strokeLinecap = 'round' strokeWidth = '2' />
-    </svg>
-);
-const SlidePlayIcon = () => (
-    <svg fill = 'none' height = '56' viewBox = '0 0 24 24' width = '56'>
-        <circle cx = '12' cy = '12' r = '9' stroke = '#1a73e8' strokeWidth = '2' />
-        <path d = 'M10 9l5 3-5 3V9Z' fill = '#1a73e8' />
-    </svg>
-);
 /* eslint-enable react/jsx-sort-props, react/jsx-max-props-per-line */
 
 const SLIDES = [
     {
+        img: './images/google-meet-ref.svg',
         title: 'Ссылка для приглашения',
         text: 'Нажмите «Новое интервью», чтобы получить ссылку и отправить её кандидату.'
     },
     {
+        img: './images/waiting-room-ref.svg',
         title: 'Комната ожидания',
         text: 'Кандидат ждёт в лобби, пока вы не впустите его в интервью.'
     },
     {
+        img: './images/start-now-ref.svg',
         title: 'Начните сразу',
         text: 'Нажмите «Начать интервью сейчас» — и вы уже в комнате как интервьюер.'
     }
@@ -739,16 +725,15 @@ export default function Welcome() {
                                     style = {{
                                         width: isCompact ? '150px' : isMobile ? '180px' : '220px',
                                         height: isCompact ? '150px' : isMobile ? '180px' : '220px',
-                                        borderRadius: '50%',
-                                        background: '#e8f0fe',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         flexShrink: 0
                                     }}>
-                                    { slide === 0 && <SlideLinkIcon /> }
-                                    { slide === 1 && <SlideLobbyIcon /> }
-                                    { slide === 2 && <SlidePlayIcon /> }
+                                    <img
+                                        alt = ''
+                                        src = { SLIDES[slide].img }
+                                        style = {{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                 </div>
                                 <md-icon-button
                                     aria-label = 'Вперёд'
