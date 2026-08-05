@@ -99,7 +99,7 @@ const LANDING_HTML = `
   .join-field{display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:var(--r-pill); height:44px; padding:0 8px 0 16px; background:#fff; transition:.15s; min-width:236px;}
   .join-field:focus-within{border-color:var(--blue); box-shadow:0 0 0 1px var(--blue);}
   .join-field svg{width:20px; height:20px; color:var(--grey-2); flex:none;}
-  .join-field input{border:none; outline:none; font-family:"Roboto"; font-size:15px; color:var(--ink); width:100%; background:transparent;}
+  .join-field input{border:none; outline:none; font-family:"Roboto",sans-serif; font-size:15px; color:var(--ink); width:100%; background:transparent;}
   .join-field input::placeholder{color:var(--grey-2);}
   .join-btn{background:none; border:none; color:var(--blue); font-weight:500; font-size:15px; cursor:pointer; padding:8px 12px; border-radius:var(--r-pill);}
   .join-btn:hover{background:var(--tint-blue);}
@@ -205,7 +205,7 @@ const LANDING_HTML = `
   .foot-brand .brand{margin-bottom:14px;}
   .foot-brand p{color:var(--grey); font-size:14px;}
   .foot-cols{display:flex; gap:64px; flex-wrap:wrap;}
-  .foot-col h5{font-family:"Roboto"; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--grey); margin:0 0 14px;}
+  .foot-col h5{font-family:"Roboto",sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--grey); margin:0 0 14px;}
   .foot-col a{display:block; color:var(--ink); font-size:14.5px; padding:5px 0; cursor:pointer;}
   .foot-col a:hover{color:var(--blue);}
   .foot-bottom{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:44px; padding-top:24px; border-top:1px solid var(--line); color:var(--grey-2); font-size:13px;}
@@ -249,7 +249,7 @@ const LANDING_HTML = `
   .pricing-head p{color:var(--grey); font-size:18px; margin-top:14px;}
 
   .bill-toggle{display:inline-flex; align-items:center; gap:6px; background:var(--bg-soft-2); border-radius:var(--r-pill); padding:5px; margin:28px auto 0; position:relative;}
-  .bill-toggle button{border:none; background:transparent; cursor:pointer; font-family:"Roboto"; font-size:14px; font-weight:500; color:var(--grey); padding:9px 20px; border-radius:var(--r-pill); transition:.18s; display:inline-flex; align-items:center; gap:8px;}
+  .bill-toggle button{border:none; background:transparent; cursor:pointer; font-family:"Roboto",sans-serif; font-size:14px; font-weight:500; color:var(--grey); padding:9px 20px; border-radius:var(--r-pill); transition:.18s; display:inline-flex; align-items:center; gap:8px;}
   .bill-toggle button.active{background:#fff; color:var(--ink); box-shadow:var(--elev-1);}
   .save-badge{font-size:11px; font-weight:600; color:var(--green); background:var(--tint-green); padding:2px 8px; border-radius:var(--r-pill);}
   .toggle-center{display:flex; justify-content:center;}
@@ -258,7 +258,7 @@ const LANDING_HTML = `
   .price-card{border:1px solid var(--line); border-radius:22px; background:#fff; padding:32px 28px; display:flex; flex-direction:column; transition:.2s;}
   .price-card:hover{box-shadow:var(--elev-2);}
   .price-card.popular{border:2px solid var(--blue); box-shadow:var(--elev-2); position:relative;}
-  .pop-badge{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:12px; font-weight:600; padding:5px 16px; border-radius:var(--r-pill); font-family:"Roboto";}
+  .pop-badge{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:12px; font-weight:600; padding:5px 16px; border-radius:var(--r-pill); font-family:"Roboto",sans-serif;}
   .price-name{font-family:"Poppins"; font-weight:600; font-size:20px;}
   .price-amount-row{display:flex; align-items:baseline; gap:6px; margin-top:16px;}
   .price-amount{font-family:"Poppins"; font-weight:600; font-size:44px; line-height:1; letter-spacing:-.02em;}
@@ -694,11 +694,14 @@ function parseJoinCode(raw: string): string {
 }
 
 /**
- * The Google Fonts the landing needs (Poppins for headings, Roboto Mono for
- * timestamps). Jitsi already serves Roboto, so it is omitted here.
+ * The Google Fonts the landing needs: Roboto (body/UI), Poppins (headings) and
+ * Roboto Mono (timestamps). Loaded at document level because @font-face inside a
+ * shadow root is ignored — see ensureFonts(). Roboto is included explicitly:
+ * Jitsi does not serve it, and several rules request "Roboto" with no fallback,
+ * so without it they drop to the browser's default serif.
  */
 const FONTS_HREF
-    = 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap';
+    = 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap';
 
 /**
  * Ensures the landing's web fonts are loaded at the *document* level. `@font-face`
