@@ -144,12 +144,6 @@ const KeyboardIcon = () => (
         <path d = 'M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8' stroke = 'currentColor' strokeLinecap = 'round' strokeWidth = '2' />
     </svg>
 );
-const CalendarIcon = () => (
-    <svg fill = 'none' height = '20' viewBox = '0 0 24 24' width = '20'>
-        <rect height = '15' rx = '2' stroke = 'currentColor' strokeWidth = '2' width = '16' x = '4' y = '5' />
-        <path d = 'M4 9h16M8 3v4M16 3v4' stroke = 'currentColor' strokeLinecap = 'round' strokeWidth = '2' />
-    </svg>
-);
 const LinkIcon = () => (
     <svg fill = 'none' height = '20' viewBox = '0 0 24 24' width = '20'>
         <path d = 'M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1' stroke = 'currentColor' strokeLinecap = 'round' strokeWidth = '2' />
@@ -181,23 +175,6 @@ const CloseIcon = () => (
 );
 /* eslint-enable react/jsx-sort-props, react/jsx-max-props-per-line */
 
-const SLIDES = [
-    // {
-    //     img: './images/google-meet-ref.svg',
-    //     title: 'Ссылка для приглашения',
-    //     text: 'Нажмите «Новое интервью», чтобы получить ссылку и отправить её кандидату.'
-    // },
-    // {
-    //     img: './images/waiting-room-ref.svg',
-    //     title: 'Комната ожидания',
-    //     text: 'Кандидат ждёт в лобби, пока вы не впустите его в интервью.'
-    // },
-    // {
-    //     img: './images/start-now-ref.svg',
-    //     title: 'Начните сразу',
-    //     text: 'Нажмите «Начать интервью сейчас» — и вы уже в комнате как интервьюер.'
-    // }
-];
 
 /**
  * Google-Meet-style landing for staff: start an instant interview room, get a
@@ -221,8 +198,7 @@ export default function Welcome() {
     // The creator's own moderator token for the room shown in the modal, so they
     // can jump in as interviewer without re-entering the code.
     const [ host, setHost ] = useState<{ jwt: string; roomName: string; } | null>(null);
-    const [ nav, setNav ] = useState<'calls' | 'meetings'>('meetings');
-    const [ slide, setSlide ] = useState(0);
+    const [ nav ] = useState<'calls' | 'meetings'>('meetings');
 
     // "Prescreening session" modal: collect the position's requirements, then
     // show the shareable candidate link (the bot auto-joins when they open it).
@@ -246,15 +222,7 @@ export default function Welcome() {
         return () => clearInterval(t);
     }, []);
 
-    // Auto-advance the feature carousel, like the Google Meet landing.
-    useEffect(() => {
-        const t = setInterval(() => setSlide(s => (s + 1) % SLIDES.length), 6000);
 
-        return () => clearInterval(t);
-    }, []);
-
-    const onPrevSlide = useCallback(() => setSlide(s => (s - 1 + SLIDES.length) % SLIDES.length), []);
-    const onNextSlide = useCallback(() => setSlide(s => (s + 1) % SLIDES.length), []);
     const clock = `${now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })} · ${
         now.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'short' })}`;
 
@@ -442,38 +410,6 @@ export default function Welcome() {
             }
         }, [ onJoin ]);
 
-    const onNavMeetings = useCallback(() => setNav('meetings'), []);
-    const onNavCalls = useCallback(() => setNav('calls'), []);
-
-    // md-list-item has no container-color/shape token, so the Meet-style active
-    // pill has to be painted on the host element; the internal container is
-    // transparent and renders on top of it.
-    const navStyle = (active: boolean): React.CSSProperties => ({
-        display: 'block',
-        background: active ? '#e8f0fe' : 'transparent',
-        borderRadius: '0 24px 24px 0',
-        overflow: 'hidden',
-        cursor: 'pointer',
-        '--md-list-item-label-text-color': active ? '#1a73e8' : '#3c4043',
-        '--md-list-item-leading-icon-color': active ? '#1a73e8' : '#5f6368',
-        '--md-list-item-label-text-size': '14px',
-        '--md-list-item-label-text-weight': active ? '500' : '400',
-        '--md-list-item-one-line-container-height': '48px'
-    } as React.CSSProperties);
-
-
-    const arrowBtn: React.CSSProperties = {
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%',
-        border: '1px solid #dadce0',
-        background: 'transparent',
-        color: '#5f6368',
-        fontSize: '20px',
-        cursor: 'pointer',
-        flexShrink: 0,
-        '--md-icon-button-icon-size': '20px'
-    } as React.CSSProperties;
 
     return (
         <div
@@ -528,7 +464,7 @@ export default function Welcome() {
                             <span slot = 'start'>
                                 <CalendarIcon />
                             </span>
-                            <div slot = 'headline'>Встречи</div>
+                            <div slot = 'headline'>Meetings</div>
                         </md-list-item>
                         <md-list-item
                             onClick = { onNavCalls }
@@ -537,7 +473,7 @@ export default function Welcome() {
                             <span slot = 'start'>
                                 <CamIcon />
                             </span>
-                            <div slot = 'headline'>Вызовы</div>
+                            <div slot = 'headline'>Calls</div>
                         </md-list-item>
                     </md-list>
                 </aside> */}
@@ -565,7 +501,7 @@ export default function Welcome() {
                                 margin: '0 0 16px',
                                 maxWidth: '620px'
                             }}>
-                            Видеоинтервью для вашей команды
+                            Video interviews for your team
                         </h1>
                         <p
                             style = {{
@@ -576,8 +512,8 @@ export default function Welcome() {
                                 maxWidth: '560px'
                             }}>
                             { organization?.name
-                                ? `${organization.name} · создайте комнату и пригласите кандидата — прямо в браузере.`
-                                : 'Создайте комнату и пригласите кандидата — прямо в браузере.' }
+                                ? `${organization.name} · create a room and invite a candidate — right in the browser.`
+                                : 'Create a room and invite a candidate — right in the browser.' }
                         </p>
 
                         <div
@@ -603,7 +539,7 @@ export default function Welcome() {
                                     <span slot = 'icon'>
                                         <CamIcon />
                                     </span>
-                                    { busy ? 'Создаём…' : 'Новая встреча' }
+                                    { busy ? 'Creating…' : 'New meeting' }
                                 </md-filled-button>
                                 <md-menu
                                     anchor = 'nr-new-meeting'
@@ -621,7 +557,7 @@ export default function Welcome() {
                                         <div
                                             slot = 'headline'
                                             style = {{ whiteSpace: 'nowrap' }}>
-                                            Новое интервью
+                                            New interview
                                         </div>
                                     </md-menu-item>
                                     <md-menu-item onClick = { onStartNow }>
@@ -631,7 +567,7 @@ export default function Welcome() {
                                         <div
                                             slot = 'headline'
                                             style = {{ whiteSpace: 'nowrap' }}>
-                                            Начать интервью сейчас
+                                            Start interview now
                                         </div>
                                     </md-menu-item>
                                     <md-menu-item onClick = { onOpenPrescreen }>
@@ -641,7 +577,7 @@ export default function Welcome() {
                                         <div
                                             slot = 'headline'
                                             style = {{ whiteSpace: 'nowrap' }}>
-                                            Прескрининг-сессия (AI)
+                                            Prescreening session (AI)
                                         </div>
                                     </md-menu-item>
                                 </md-menu>
@@ -658,7 +594,7 @@ export default function Welcome() {
                                     disabled = { busy }
                                     onInput = { onCodeChange }
                                     onKeyDown = { onCodeKeyDown }
-                                    placeholder = 'Введите код встречи или ссылку'
+                                    placeholder = 'Enter a meeting code or link'
                                     style = {{ width: isMobile ? '100%' : '280px' }}
                                     value = { code }>
                                     <span slot = 'leading-icon'>
@@ -668,7 +604,7 @@ export default function Welcome() {
                                 <md-text-button
                                     disabled = { busy || !code.trim() }
                                     onClick = { onJoin }>
-                                    Присоединиться
+                                    Join
                                 </md-text-button>
                             </div>
                         </div>
@@ -716,7 +652,7 @@ export default function Welcome() {
                                     width: '100%'
                                 }}>
                                 <md-icon-button
-                                    aria-label = 'Назад'
+                                    aria-label = 'Back'
                                     onClick = { onPrevSlide }
                                     style = { arrowBtn }>
                                     ‹
@@ -736,7 +672,7 @@ export default function Welcome() {
                                         style = {{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                 </div>
                                 <md-icon-button
-                                    aria-label = 'Вперёд'
+                                    aria-label = 'Forward'
                                     onClick = { onNextSlide }
                                     style = { arrowBtn }>
                                     ›
@@ -787,10 +723,10 @@ export default function Welcome() {
                     //     }}>
                     //     <div>
                     //         <h2 style = {{ fontSize: '24px', fontWeight: 400, color: '#3c4043', margin: '0 0 8px' }}>
-                    //             Вызовы
+                    //             Calls
                     //         </h2>
                     //         <p style = {{ fontSize: '16px', color: '#5f6368', margin: 0 }}>
-                    //             Раздел появится позже.
+                    //             This section will appear later.
                     //         </p>
                     //     </div>
                     // </main>
@@ -798,7 +734,7 @@ export default function Welcome() {
             </div>
 
             <md-dialog
-                aria-label = 'Данные для подключения к встрече'
+                aria-label = 'Meeting connection details'
                 open = { Boolean(inviteUrl) }
                 ref = { dialogRef }
                 style = {{
@@ -825,18 +761,18 @@ export default function Welcome() {
                             color: '#202124',
                             margin: '0 44px 16px 0'
                         }}>
-                        Данные для подключения к встрече
+                        Meeting connection details
                     </div>
                     <md-icon-button
-                        aria-label = 'Закрыть'
+                        aria-label = 'Close'
                         onClick = { closeModal }
                         style = {{ position: 'absolute', top: '8px', right: '12px', color: '#5f6368' }}
-                        title = 'Закрыть'>
+                        title = 'Close'>
                         <CloseIcon />
                     </md-icon-button>
                     <p style = {{ color: '#5f6368', fontSize: '15px', margin: '0 0 20px' }}>
-                        Отправьте эту ссылку кандидату. Сохраните её, если планируете
-                        интервью позже.
+                        Send this link to the candidate. Save it if you plan to
+                        interview later.
                     </p>
                     <div
                         style = {{
@@ -859,16 +795,16 @@ export default function Welcome() {
                             { inviteUrl }
                         </span>
                         <md-icon-button
-                            aria-label = 'Копировать ссылку'
+                            aria-label = 'Copy link'
                             onClick = { onCopy }
                             style = {{ color: '#1a73e8' }}
-                            title = 'Копировать ссылку'>
+                            title = 'Copy link'>
                             <CopyIcon />
                         </md-icon-button>
                     </div>
                     { copied && (
                         <p style = {{ color: '#1e8e3e', fontSize: '13px', margin: '10px 0 0' }}>
-                            Ссылка скопирована
+                            Link copied
                         </p>
                     ) }
                 </div>
@@ -879,12 +815,12 @@ export default function Welcome() {
                         justifyContent: 'flex-end',
                         padding: '20px 24px 24px'
                     }}>
-                    <md-filled-button onClick = { onJoinAsHost }>Войти как интервьюер</md-filled-button>
+                    <md-filled-button onClick = { onJoinAsHost }>Join as interviewer</md-filled-button>
                 </div>
             </md-dialog>
 
             <md-dialog
-                aria-label = 'Прескрининг-сессия'
+                aria-label = 'Prescreening session'
                 open = { prescreenOpen }
                 ref = { prescreenDialogRef }
                 style = {{
@@ -904,21 +840,21 @@ export default function Welcome() {
                             color: '#202124',
                             margin: '0 44px 16px 0'
                         }}>
-                        Прескрининг-сессия (AI)
+                        Prescreening session (AI)
                     </div>
                     <md-icon-button
-                        aria-label = 'Закрыть'
+                        aria-label = 'Close'
                         onClick = { closePrescreen }
                         style = {{ position: 'absolute', top: '8px', right: '12px', color: '#5f6368' }}
-                        title = 'Закрыть'>
+                        title = 'Close'>
                         <CloseIcon />
                     </md-icon-button>
 
                     { prescreenLink ? (
                         <>
                             <p style = {{ color: '#5f6368', fontSize: '15px', margin: '0 0 20px' }}>
-                                Отправьте эту ссылку кандидату. AI-рекрутер присоединится к
-                                нему автоматически и проведёт первичный скрининг.
+                                Send this link to the candidate. The AI recruiter will join
+                                automatically and run the initial screening.
                             </p>
                             <div
                                 style = {{
@@ -941,30 +877,30 @@ export default function Welcome() {
                                     { prescreenLink }
                                 </span>
                                 <md-icon-button
-                                    aria-label = 'Копировать ссылку'
+                                    aria-label = 'Copy link'
                                     onClick = { onCopyPrescreen }
                                     style = {{ color: '#1a73e8' }}
-                                    title = 'Копировать ссылку'>
+                                    title = 'Copy link'>
                                     <CopyIcon />
                                 </md-icon-button>
                             </div>
                             { copied && (
                                 <p style = {{ color: '#1e8e3e', fontSize: '13px', margin: '10px 0 0' }}>
-                                    Ссылка скопирована
+                                    Link copied
                                 </p>
                             ) }
                         </>
                     ) : (
                         <>
                             <p style = {{ color: '#5f6368', fontSize: '15px', margin: '0 0 16px' }}>
-                                Опишите позицию и ключевые требования — AI-рекрутер будет
-                                задавать вопросы по этому контексту.
+                                Describe the position and key requirements — the AI recruiter will
+                                ask questions based on this context.
                             </p>
                             <md-outlined-text-field
                                 disabled = { busy }
-                                label = 'Требования к позиции'
+                                label = 'Position requirements'
                                 onInput = { onRequirementsChange }
-                                placeholder = 'Напр.: Backend (Python), middle. FastAPI/Django, PostgreSQL, очереди (Celery/Kafka), Docker.'
+                                placeholder = 'E.g.: Backend (Python), middle. FastAPI/Django, PostgreSQL, queues (Celery/Kafka), Docker.'
                                 rows = { 5 }
                                 style = {{ width: '100%' }}
                                 type = 'textarea'
@@ -986,18 +922,18 @@ export default function Welcome() {
                         padding: '20px 24px 24px'
                     }}>
                     { prescreenLink ? (
-                        <md-filled-button onClick = { closePrescreen }>Готово</md-filled-button>
+                        <md-filled-button onClick = { closePrescreen }>Done</md-filled-button>
                     ) : (
                         <>
                             <md-text-button
                                 disabled = { busy }
                                 onClick = { closePrescreen }>
-                                Отмена
+                                Cancel
                             </md-text-button>
                             <md-filled-button
                                 disabled = { busy || !requirements.trim() }
                                 onClick = { onCreatePrescreen }>
-                                { busy ? 'Создаём…' : 'Создать ссылку' }
+                                { busy ? 'Creating…' : 'Create link' }
                             </md-filled-button>
                         </>
                     ) }
