@@ -348,7 +348,6 @@ const LANDING_HTML = `
     <div class="hero-text">
       <span class="eyebrow hero-anim">
         <span class="dots"><i style="background:#1a73e8"></i><i style="background:#34a853"></i><i style="background:#fbbc04"></i><i style="background:#ea4335"></i></span>
-        Like Google Meet — but for interviews, powered by AI
       </span>
       <h1 class="hero-title hero-anim d2">Interviews 2.0 — <span class="accent">AI-powered</span>. Zero cheating.</h1>
       <p class="hero-sub hero-anim d3">An AI interviewer runs your first rounds. Live rounds stay cheat-proof. You meet only the candidates worth meeting.</p>
@@ -656,7 +655,6 @@ const LANDING_HTML = `
     </div>
     <div class="foot-bottom">
       <span>© 2026 NextRound. All rights reserved.</span>
-      <span class="disclaimer">NextRound is an independent product and is not affiliated with, endorsed by, or sponsored by Google LLC. Google Meet is a trademark of Google LLC.</span>
     </div>
   </div>
 </footer>

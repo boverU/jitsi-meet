@@ -182,21 +182,21 @@ const CloseIcon = () => (
 /* eslint-enable react/jsx-sort-props, react/jsx-max-props-per-line */
 
 const SLIDES = [
-    {
-        img: './images/google-meet-ref.svg',
-        title: 'Ссылка для приглашения',
-        text: 'Нажмите «Новое интервью», чтобы получить ссылку и отправить её кандидату.'
-    },
-    {
-        img: './images/waiting-room-ref.svg',
-        title: 'Комната ожидания',
-        text: 'Кандидат ждёт в лобби, пока вы не впустите его в интервью.'
-    },
-    {
-        img: './images/start-now-ref.svg',
-        title: 'Начните сразу',
-        text: 'Нажмите «Начать интервью сейчас» — и вы уже в комнате как интервьюер.'
-    }
+    // {
+    //     img: './images/google-meet-ref.svg',
+    //     title: 'Ссылка для приглашения',
+    //     text: 'Нажмите «Новое интервью», чтобы получить ссылку и отправить её кандидату.'
+    // },
+    // {
+    //     img: './images/waiting-room-ref.svg',
+    //     title: 'Комната ожидания',
+    //     text: 'Кандидат ждёт в лобби, пока вы не впустите его в интервью.'
+    // },
+    // {
+    //     img: './images/start-now-ref.svg',
+    //     title: 'Начните сразу',
+    //     text: 'Нажмите «Начать интервью сейчас» — и вы уже в комнате как интервьюер.'
+    // }
 ];
 
 /**
@@ -707,7 +707,7 @@ export default function Welcome() {
                                 flexDirection: 'column',
                                 alignItems: 'center'
                             }}>
-                            <div
+                            {/* <div
                                 style = {{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -741,8 +741,8 @@ export default function Welcome() {
                                     style = { arrowBtn }>
                                     ›
                                 </md-icon-button>
-                            </div>
-                            <h3
+                            </div> */}
+                            {/* <h3
                                 style = {{
                                     fontSize: '22px',
                                     fontWeight: 400,
@@ -750,8 +750,8 @@ export default function Welcome() {
                                     margin: '28px 0 8px'
                                 }}>
                                 { SLIDES[slide].title }
-                            </h3>
-                            <p
+                            </h3> */}
+                            {/* <p
                                 style = {{
                                     fontSize: '15px',
                                     color: '#5f6368',
@@ -759,8 +759,8 @@ export default function Welcome() {
                                     maxWidth: '380px'
                                 }}>
                                 { SLIDES[slide].text }
-                            </p>
-                            <div style = {{ display: 'flex', gap: '8px', marginTop: '20px' }}>
+                            </p> */}
+                            {/* <div style = {{ display: 'flex', gap: '8px', marginTop: '20px' }}>
                                 { SLIDES.map((s, i) => (
                                     <span
                                         key = { s.title }
@@ -771,28 +771,29 @@ export default function Welcome() {
                                             background: i === slide ? '#1a73e8' : '#dadce0'
                                         }} />
                                 )) }
-                            </div>
+                            </div> */}
                         </div>
                     </main>
                 ) : (
-                    <main
-                        style = {{
-                            flex: 1,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            padding: '0 24px'
-                        }}>
-                        <div>
-                            <h2 style = {{ fontSize: '24px', fontWeight: 400, color: '#3c4043', margin: '0 0 8px' }}>
-                                Вызовы
-                            </h2>
-                            <p style = {{ fontSize: '16px', color: '#5f6368', margin: 0 }}>
-                                Раздел появится позже.
-                            </p>
-                        </div>
-                    </main>
+                    null
+                    // <main
+                    //     style = {{
+                    //         flex: 1,
+                    //         display: 'flex',
+                    //         alignItems: 'center',
+                    //         justifyContent: 'center',
+                    //         textAlign: 'center',
+                    //         padding: '0 24px'
+                    //     }}>
+                    //     <div>
+                    //         <h2 style = {{ fontSize: '24px', fontWeight: 400, color: '#3c4043', margin: '0 0 8px' }}>
+                    //             Вызовы
+                    //         </h2>
+                    //         <p style = {{ fontSize: '16px', color: '#5f6368', margin: 0 }}>
+                    //             Раздел появится позже.
+                    //         </p>
+                    //     </div>
+                    // </main>
                 ) }
             </div>
 
