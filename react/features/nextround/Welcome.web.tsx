@@ -513,7 +513,7 @@ export default function Welcome() {
             </header>
 
             <div style = {{ display: 'flex', flex: 1, minHeight: 0 }}>
-                <aside
+                {/* <aside
                     style = {{
                         display: isMobile ? 'none' : 'block',
                         width: '240px',
@@ -540,7 +540,7 @@ export default function Welcome() {
                             <div slot = 'headline'>Вызовы</div>
                         </md-list-item>
                     </md-list>
-                </aside>
+                </aside> */}
 
                 { nav === 'meetings' ? (
                     <main
